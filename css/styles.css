@@ -79,7 +79,7 @@ h3 { font-size: 1.25rem; }
   height: 72px;
 }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.brand img { height: 26px; width: auto; }
+.brand img { height: 26px; width: auto; aspect-ratio: 900 / 98; }
 .brand .brand-iso { height: 38px; display: none; }
 
 .main-nav { display: flex; align-items: center; gap: 6px; }
@@ -342,7 +342,7 @@ table.price-table { width: 100%; border-collapse: collapse; font-size: .93rem; m
 }
 .site-footer a { color: rgba(240,235,225,.78); text-decoration: none; }
 .site-footer a:hover { color: var(--white); text-decoration: underline; }
-.footer-brand img { height: 46px; width: auto; filter: brightness(0) invert(1); opacity: .95; margin-bottom: 14px; }
+.footer-brand img { width: 190px; height: auto; max-width: 100%; opacity: .95; margin-bottom: 14px; }
 .footer-brand p { max-width: 30ch; }
 .footer-list { list-style: none; display: grid; gap: 9px; }
 .footer-bottom {
@@ -443,4 +443,128 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   .section { padding: 60px 0; }
   .footer-grid { grid-template-columns: 1fr; gap: 30px; }
   .photo-print:nth-child(3) { display: none; }
+}
+
+
+/* ============================================================
+   AMPLIACIONS — canvis sol·licitats pel client
+   ============================================================ */
+
+/* ---------- Preu destacat a les targetes de servei ---------- */
+.card-price {
+  margin: 0 8px 12px;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+/* ---------- Botiga: fitxes de producte amb foto ---------- */
+.product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.product-card {
+  background: var(--white); border-radius: 6px; box-shadow: var(--shadow-soft);
+  padding: 18px 18px 22px; display: flex; flex-direction: column;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-photo); }
+.product-media {
+  aspect-ratio: 1/1; border-radius: 4px; margin-bottom: 16px;
+  background: var(--cream-soft);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; position: relative;
+}
+.product-media img { width: 100%; height: 100%; object-fit: contain; padding: 8px; }
+.product-media .ph { width: 100%; height: 100%; font-size: 3rem; background: linear-gradient(135deg, var(--cream-dark), var(--navy) 150%); }
+/* Galeria de miniatures per producte */
+.product-thumbs { display: flex; gap: 8px; margin-bottom: 14px; }
+.product-thumbs button {
+  flex: 1; aspect-ratio: 1/1; border: 1.5px solid var(--cream-dark); border-radius: 4px;
+  background: var(--cream-soft); cursor: pointer; padding: 4px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+  transition: border-color .18s;
+}
+.product-thumbs button img { width: 100%; height: 100%; object-fit: contain; }
+.product-thumbs button:hover, .product-thumbs button[aria-current="true"] { border-color: var(--navy); }
+.product-card h3 { color: var(--navy); font-size: 1.08rem; margin-bottom: 6px; }
+.product-card .product-desc { font-size: .88rem; color: var(--ink-soft); flex: 1; margin-bottom: 12px; }
+.product-card .product-price {
+  font-family: var(--font-display); font-size: 1.45rem; font-weight: 700;
+  color: var(--navy); margin-bottom: 14px;
+}
+.product-card .btn { justify-content: center; }
+
+/* Títols de producte en blau també a les taules de la botiga */
+.price-table td.product-name { color: var(--navy); font-weight: 600; }
+
+/* ---------- Protecció d'imatges ---------- */
+img, .ph, .product-media, .photo-print {
+  -webkit-user-select: none; user-select: none;
+  -webkit-user-drag: none; -webkit-touch-callout: none;
+}
+img { pointer-events: none; }
+.product-thumbs button img, .brand img { pointer-events: auto; }
+
+/* ---------- Bombolla d'avís en obrir la web ---------- */
+.intro-bubble {
+  position: fixed; right: 20px; bottom: 92px; z-index: 95;
+  width: min(330px, calc(100vw - 40px));
+  background: var(--white); border-radius: 14px;
+  box-shadow: 0 10px 40px rgba(26,26,26,.22);
+  padding: 22px 22px 20px; border-top: 4px solid var(--navy);
+  opacity: 0; transform: translateY(14px) scale(.97); pointer-events: none;
+  transition: opacity .45s ease, transform .45s ease;
+}
+.intro-bubble.show { opacity: 1; transform: none; pointer-events: auto; }
+.intro-bubble p { font-size: .95rem; color: var(--ink); margin-bottom: 16px; line-height: 1.5; }
+.intro-bubble .bubble-title {
+  font-family: var(--font-display); font-weight: 700; font-size: 1.1rem;
+  color: var(--navy); margin-bottom: 8px; display: block;
+}
+.intro-bubble .btn { width: 100%; justify-content: center; padding: 12px 18px; }
+.bubble-close {
+  position: absolute; top: 10px; right: 10px; width: 30px; height: 30px;
+  border: none; background: var(--cream); border-radius: 50%; cursor: pointer;
+  font-size: 1.1rem; line-height: 1; color: var(--ink-soft);
+}
+.bubble-close:hover { background: var(--cream-dark); color: var(--ink); }
+@media (max-width: 600px) {
+  .intro-bubble { right: 12px; left: 12px; width: auto; bottom: 88px; }
+  .product-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 960px) {
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+
+/* ============================================================
+   FOTOS REALS — ajustos
+   ============================================================ */
+img.ph { object-fit: cover; width: 100%; height: auto; }
+.service-card img.ph { aspect-ratio: 4/3; }
+.photo-print img.ph { width: 210px; height: 210px; object-fit: cover; }
+img.ph--tall { aspect-ratio: 3/4; }
+img.ph--wide { aspect-ratio: 16/10; }
+.ba-compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ba-compare .ba-before { filter: sepia(.55) contrast(.8) brightness(.92) saturate(.7); }
+.ba-compare .ba-after { clip-path: inset(0 0 0 50%); filter: none; }
+
+/* Galeria de fotos (emmarcacions, carret) */
+.photo-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.photo-gallery img {
+  width: 100%; aspect-ratio: 1/1; object-fit: cover;
+  border-radius: 4px; box-shadow: var(--shadow-soft);
+  transition: transform .3s ease;
+}
+.photo-gallery img:hover { transform: scale(1.02); }
+.gallery-film { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+.gallery-film img {
+  width: 100%; aspect-ratio: 2/3; object-fit: cover;
+  border-radius: 3px; box-shadow: var(--shadow-soft);
+}
+@media (max-width: 860px) {
+  .photo-gallery { grid-template-columns: repeat(2, 1fr); }
+  .gallery-film { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 500px) {
+  .gallery-film { grid-template-columns: repeat(2, 1fr); }
 }
