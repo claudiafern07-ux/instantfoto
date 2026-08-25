@@ -17,6 +17,7 @@ NAV_SERVICES = [
     ("revelat.html", "Revelat de carrets"),
     ("restauracio.html", "Restauració de fotos"),
     ("regals.html", "Regals personalitzats"),
+    ("lloguer.html", "Lloguer de càmeres"),
 ]
 
 def header(active):
@@ -47,7 +48,7 @@ def header(active):
 FOOTER = f'''<footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-brand">
-      <img src="assets/logo-horizontal.png" alt="Instant Foto" width="200" height="22" loading="lazy">
+      <img src="assets/logo-horizontal-cream.png" alt="Instant Foto" width="190" height="21" loading="lazy">
       <p>Especialistes en conservar els teus records a Terrassa. Estudi fotogràfic de proximitat, amb tracte personal.</p>
       <p style="margin-top:12px">⭐ 5,0 a Google · 26 ressenyes<br>🏳️‍🌈 LGBTQ+ friendly · Propietàries dones</p>
     </div>
@@ -60,6 +61,7 @@ FOOTER = f'''<footer class="site-footer">
         <li><a href="revelat.html">Revelat de carrets a Terrassa</a></li>
         <li><a href="restauracio.html">Restauració de fotos antigues</a></li>
         <li><a href="regals.html">Regals personalitzats</a></li>
+        <li><a href="lloguer.html">Lloguer de càmeres a Terrassa</a></li>
       </ul>
     </div>
     <div>
@@ -67,6 +69,7 @@ FOOTER = f'''<footer class="site-footer">
       <ul class="footer-list">
         <li>Pl. Comte Guifré, Local 1<br>08221 Terrassa (Barcelona)</li>
         <li><a href="tel:+34618642868">618 64 28 68</a></li>
+        <li><a href="mailto:instantfoto8@gmail.com">instantfoto8@gmail.com</a></li>
         <li><a href="https://instagram.com/instant.foto" target="_blank" rel="noopener">@instant.foto</a></li>
       </ul>
     </div>
@@ -85,6 +88,14 @@ FOOTER = f'''<footer class="site-footer">
   </div>
 </footer>
 <a class="wa-float" href="{wa_link("Hola! Us escric des de la web d'Instant Foto.")}" target="_blank" rel="noopener" aria-label="Contactar per WhatsApp">{WA_ICON}</a>
+
+<aside class="intro-bubble" role="complementary" aria-label="Avís d'Instant Foto">
+  <button class="bubble-close" aria-label="Tancar l'avís">&times;</button>
+  <span class="bubble-title">Els teus records, a punt en 24/48 h</span>
+  <p>Envia'ns els teus records per WhatsApp i en 24/48 h els pots passar a recollir a la botiga.</p>
+  <a class="btn btn-wa" href="{wa_link("Hola! Vull enviar-vos unes fotos per imprimir.")}" target="_blank" rel="noopener">{WA_ICON} Enviar els meus records</a>
+</aside>
+
 <script src="js/main.js"></script>'''
 
 SCHEMA = '''<script type="application/ld+json">
@@ -96,6 +107,7 @@ SCHEMA = '''<script type="application/ld+json">
   "image": "%(base)s/assets/logo-if.png",
   "url": "%(base)s/",
   "telephone": "+34618642868",
+  "email": "instantfoto8@gmail.com",
   "priceRange": "€€",
   "address": {
     "@type": "PostalAddress",
@@ -119,7 +131,8 @@ SCHEMA = '''<script type="application/ld+json">
     { "@type": "Offer", "name": "Digitalització de VHS i cintes a Terrassa" },
     { "@type": "Offer", "name": "Revelat de carrets a Terrassa" },
     { "@type": "Offer", "name": "Restauració de fotos antigues a Terrassa" },
-    { "@type": "Offer", "name": "Regals personalitzats amb fotos a Terrassa" }
+    { "@type": "Offer", "name": "Regals personalitzats amb fotos a Terrassa" },
+    { "@type": "Offer", "name": "Lloguer de càmeres i objectius a Terrassa" }
   ]
 }
 </script>''' % {"base": BASE}
@@ -200,10 +213,10 @@ index_body = f'''
         <a class="btn btn-light" href="#serveis">Veure serveis</a>
       </div>
     </div>
-    <div class="photo-stack" aria-hidden="true">
-      <figure class="photo-print"><div class="ph">📼</div><figcaption>Estiu del 94</figcaption></figure>
-      <figure class="photo-print"><div class="ph">📷</div><figcaption>L'àvia Maria</figcaption></figure>
-      <figure class="photo-print"><div class="ph">🎞️</div><figcaption>Primer carret</figcaption></figure>
+    <div class="photo-stack">
+      <figure class="photo-print"><img class="ph" src="assets/fotos/home-1.jpg" alt="Fotografia analògica revelada a Instant Foto Terrassa" width="420" height="420" loading="eager"><figcaption>Revelat analògic</figcaption></figure>
+      <figure class="photo-print"><img class="ph" src="assets/fotos/home-2.jpg" alt="Foto de carret revelada a l'estudi fotogràfic de Terrassa" width="420" height="420" loading="eager"><figcaption>Carret de 35 mm</figcaption></figure>
+      <figure class="photo-print"><img class="ph" src="assets/fotos/home-4.jpg" alt="Record imprès en paper fotogràfic a Terrassa" width="420" height="420" loading="eager"><figcaption>Els teus records</figcaption></figure>
     </div>
   </div>
 </section>
@@ -226,40 +239,53 @@ index_body = f'''
     </div>
     <div class="services-grid">
       <a class="service-card reveal" href="impressio.html">
-        <div class="ph">🖼️</div>
+        <img class="ph" src="assets/fotos/serv-impressio.jpg" alt="Imprimir fotos a Terrassa en tots els formats" width="600" height="450" loading="lazy">
         <h3>Impressió de fotos</h3>
-        <p>Tots els formats, acabat brillant o mat. Envia-les per WhatsApp i recull-les en 24–48 h. Des de 0,40 €/foto.</p>
+        <p>Tots els formats, acabat brillant o mat. Envia-les per WhatsApp i recull-les en 24–48 h.</p>
+        <p class="card-price">Des de 0,35 €</p>
         <span class="card-link">Imprimir fotos a Terrassa</span>
       </a>
       <a class="service-card reveal" href="emmarcacions.html">
-        <div class="ph">🪞</div>
+        <img class="ph" src="assets/fotos/serv-emmarcacions.jpg" alt="Emmarcacions a mida fetes a Terrassa" width="600" height="450" loading="lazy">
         <h3>Emmarcacions a mida</h3>
-        <p>Marcs a mida per a fotos, làmines i llenços. També miralls personalitzats. Pressupost gratuït a botiga.</p>
+        <p>Marcs a mida per a fotos, làmines i llenços. També miralls personalitzats.</p>
+        <p class="card-price">Pressupost gratuït</p>
         <span class="card-link">Emmarcacions a Terrassa</span>
       </a>
       <a class="service-card reveal" href="digitalitzacio.html">
-        <div class="ph">📼</div>
+        <img class="ph" src="assets/fotos/serv-digitalitzacio.jpg" alt="Digitalitzar cintes VHS i diapositives a Terrassa" width="600" height="450" loading="lazy">
         <h3>Digitalització de cintes</h3>
-        <p>VHS, MiniDV, Hi8, Super 8, Beta, diapositives… Les teves cintes mai surten de la botiga. Des de 13 €/cinta.</p>
+        <p>VHS, MiniDV, Hi8, Super 8, Beta, diapositives… Les teves cintes mai surten de la botiga.</p>
+        <p class="card-price">Des de 13 €</p>
         <span class="card-link">Digitalitzar VHS a Terrassa</span>
       </a>
       <a class="service-card reveal" href="revelat.html">
-        <div class="ph">🎞️</div>
+        <img class="ph" src="assets/fotos/serv-revelat.jpg" alt="Revelat de carrets fotogràfics a Terrassa" width="600" height="450" loading="lazy">
         <h3>Revelat de carrets</h3>
-        <p>Color des de 13,90 € i blanc i negre 18,90 €. Rebràs els arxius per WeTransfer en una setmana.</p>
+        <p>Revelem el teu carret i rebràs els arxius per WeTransfer en una setmana.</p>
+        <p class="card-price">Des de 13,90 €</p>
         <span class="card-link">Revelat de carrets a Terrassa</span>
       </a>
       <a class="service-card reveal" href="restauracio.html">
-        <div class="ph">🪄</div>
+        <img class="ph" src="assets/fotos/serv-restauracio.jpg" alt="Restauració de fotos antigues a Terrassa" width="600" height="450" loading="lazy">
         <h3>Restauració de fotos antigues</h3>
-        <p>Recuperem fotos esquinçades, esvaïdes o tacades. Des de 18 €, amb entrega en una setmana.</p>
+        <p>Recuperem fotos esquinçades, esvaïdes o tacades, amb entrega en una setmana.</p>
+        <p class="card-price">Des de 18 €</p>
         <span class="card-link">Restauració de fotos antigues</span>
       </a>
       <a class="service-card reveal" href="regals.html">
-        <div class="ph">🎁</div>
+        <img class="ph" src="assets/fotos/serv-regals.jpg" alt="Regals personalitzats amb fotos a Terrassa" width="600" height="450" loading="lazy">
         <h3>Regals personalitzats</h3>
-        <p>Tasses, samarretes, imants, fusta, llenç, metacrilat i foam amb les teves fotos. Regals que emocionen.</p>
+        <p>Tasses, samarretes, imants, fusta, llenç, metacrilat i foam amb les teves fotos.</p>
+        <p class="card-price">Des de 12 €</p>
         <span class="card-link">Regals personalitzats a Terrassa</span>
+      </a>
+      <a class="service-card reveal" href="lloguer.html">
+        <img class="ph" src="assets/fotos/lloguer-kit-r10-50.png" alt="Lloguer de càmeres i objectius a Terrassa — Canon EOS R10" width="600" height="450" loading="lazy">
+        <h3>Lloguer de càmeres</h3>
+        <p>Lloga càmeres i objectius professionals per un dia, un cap de setmana o el que necessitis.</p>
+        <p class="card-price">Consulta'ns el preu</p>
+        <span class="card-link">Lloguer de material a Terrassa</span>
       </a>
     </div>
   </div>
@@ -296,7 +322,7 @@ index_body = f'''
       <p class="lead" style="margin:16px 0 26px">Carrets Kodak i Fujifilm, càmeres analògiques d'un sol ús i reutilitzables, memòries USB i portarretrats de bambú, pedra i més. Reserva per WhatsApp i recull a botiga.</p>
       <a class="btn btn-primary" href="botiga.html">Veure la botiga</a>
     </div>
-    <div class="ph ph--wide reveal">🛍️</div>
+    <img class="ph ph--wide reveal" src="assets/fotos/serv-botiga.jpg" alt="Botiga d'Instant Foto a Terrassa amb carrets, càmeres i marcs" width="900" height="600" loading="lazy">
   </div>
 </section>
 
@@ -375,7 +401,7 @@ imp_body = page_hero("Impressió de fotos · Terrassa",
 
 <section class="section">
   <div class="container split">
-    <div class="ph ph--wide reveal">📲</div>
+    <img class="ph ph--wide reveal" src="assets/fotos/serv-impressio.jpg" alt="Impressió de fotos a Terrassa en acabat brillant i mat" width="900" height="600" loading="lazy">
     <div class="reveal">
       <h2>Com fer la comanda</h2>
       <ul class="feature-list" style="margin-top:24px">
@@ -421,7 +447,7 @@ emm_body = page_hero("Emmarcacions a mida · Terrassa",
         <li>Pressupost gratuït i sense compromís</li>
       </ul>
     </div>
-    <div class="ph ph--tall reveal">🖼️</div>
+    <img class="ph ph--tall reveal" src="assets/fotos/emm-5.jpg" alt="Marc a mida fet a Instant Foto Terrassa" width="700" height="930" loading="lazy">
   </div>
 </section>
 
@@ -435,6 +461,27 @@ emm_body = page_hero("Emmarcacions a mida · Terrassa",
       <div class="step reveal"><h3>Porta la peça</h3><p>Vine a la botiga amb la foto, làmina o objecte que vulguis emmarcar. Si ho prefereixes, envia'ns una foto per WhatsApp per avançar feina.</p></div>
       <div class="step reveal"><h3>Tria amb nosaltres</h3><p>Et mostrem motllures i acabats i et donem un pressupost gratuït al moment.</p></div>
       <div class="step reveal"><h3>Recull la teva obra</h3><p>T'avisem quan el marc estigui llest. El resultat, com fet per a tu — perquè ho està.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <span class="eyebrow">Feines fetes</span>
+      <h2>Alguns dels nostres marcs</h2>
+      <p class="lead">Cada peça és diferent. Aquests són alguns treballs sortits del taller de la Pl. Comte Guifré.</p>
+    </div>
+    <div class="photo-gallery reveal">
+      <img src="assets/fotos/emm-1.jpg" alt="Emmarcació a mida feta a Terrassa" width="600" height="600" loading="lazy">
+      <img src="assets/fotos/emm-2.jpg" alt="Marc a mida per a fotografia — Instant Foto Terrassa" width="600" height="600" loading="lazy">
+      <img src="assets/fotos/emm-3.jpg" alt="Emmarcació de làmina amb paspartú a Terrassa" width="600" height="600" loading="lazy">
+      <img src="assets/fotos/emm-4.jpg" alt="Marc personalitzat fet a mida a Terrassa" width="600" height="600" loading="lazy">
+      <img src="assets/fotos/emm-6.jpg" alt="Emmarcació artesanal a Instant Foto Terrassa" width="600" height="600" loading="lazy">
+      <img src="assets/fotos/emm-7.jpg" alt="Mostrari de motllures per a emmarcacions a Terrassa" width="600" height="600" loading="lazy">
+      <img src="assets/fotos/emm-8.jpg" alt="Marc a mida acabat a la botiga de Terrassa" width="600" height="600" loading="lazy">
+      <img src="assets/fotos/emm-9.jpg" alt="Treball d'emmarcació a mida a Terrassa" width="600" height="600" loading="lazy">
+      <img src="assets/fotos/botiga-marcs.jpg" alt="Racó de marcs i motllures a Instant Foto Terrassa" width="600" height="600" loading="lazy">
     </div>
   </div>
 </section>
@@ -461,7 +508,7 @@ dig_body = page_hero("Digitalització · Terrassa",
 
 <section class="section">
   <div class="container split">
-    <div class="ph ph--wide reveal">📼</div>
+    <img class="ph ph--wide reveal" src="assets/fotos/serv-digitalitzacio.jpg" alt="Digitalització de diapositives i cintes VHS a Terrassa" width="900" height="600" loading="lazy">
     <div class="reveal">
       <span class="eyebrow">La nostra promesa</span>
       <h2>Les teves cintes mai surten de la botiga</h2>
@@ -564,18 +611,36 @@ rev_body = page_hero("Revelat de carrets · Terrassa",
         <li>Si vols còpies en paper, les <a href="impressio.html">imprimim</a> des de 0,35 €</li>
       </ul>
     </div>
-    <div class="ph ph--tall reveal">🎞️</div>
+    <img class="ph ph--tall reveal" src="assets/fotos/carret-2.jpg" alt="Foto revelada d'un carret de 35 mm a Terrassa" width="700" height="930" loading="lazy">
   </div>
 </section>
 
 <section class="section">
   <div class="container split">
-    <div class="ph ph--wide reveal">📷</div>
+    <img class="ph ph--wide reveal" src="assets/fotos/botiga-expositor.jpg" alt="Carrets i càmeres analògiques a la botiga d'Instant Foto Terrassa" width="900" height="600" loading="lazy">
     <div class="reveal">
       <span class="eyebrow">Tot per a l'analògic</span>
       <h2>Sense carret? En venem</h2>
       <p class="lead" style="margin:16px 0 26px">A la botiga trobaràs carrets Kodak Gold, Ultramax i Fujifilm, i càmeres analògiques d'un sol ús i reutilitzables. El cercle analògic complet, a Terrassa.</p>
       <a class="btn btn-primary" href="botiga.html">Veure carrets i càmeres</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <span class="eyebrow">Fotos de carret</span>
+      <h2>Això és el que surt d'un carret</h2>
+      <p class="lead">Gra, llum natural i colors que cap filtre imita. Totes aquestes fotos són carrets revelats a Instant Foto.</p>
+    </div>
+    <div class="gallery-film reveal">
+      <img src="assets/fotos/carret-1.jpg" alt="Foto analògica revelada a Instant Foto Terrassa" width="400" height="600" loading="lazy">
+      <img src="assets/fotos/carret-2.jpg" alt="Fotografia de carret de 35 mm revelada a Terrassa" width="400" height="600" loading="lazy">
+      <img src="assets/fotos/carret-3.jpg" alt="Revelat de carret en color a Terrassa" width="400" height="600" loading="lazy">
+      <img src="assets/fotos/carret-4.jpg" alt="Foto analògica amb gra revelada a Terrassa" width="400" height="600" loading="lazy">
+      <img src="assets/fotos/carret-5.jpg" alt="Fotografia en blanc i negre revelada a Instant Foto" width="400" height="600" loading="lazy">
+      <img src="assets/fotos/carret-6.jpg" alt="Foto de carret revelada a l'estudi de Terrassa" width="400" height="600" loading="lazy">
     </div>
   </div>
 </section>
@@ -613,8 +678,8 @@ res_body = page_hero("Restauració · Terrassa",
       </ul>
     </div>
     <div class="ba-compare reveal" aria-label="Comparador d'abans i després de la restauració">
-      <div class="ba-before">🕰️</div>
-      <div class="ba-after">✨</div>
+      <img class="ba-before" src="assets/fotos/serv-restauracio.jpg" alt="Foto antiga abans de la restauració" width="800" height="600">
+      <img class="ba-after" src="assets/fotos/serv-restauracio.jpg" alt="La mateixa foto després de la restauració a Terrassa" width="800" height="600">
       <div class="ba-handle"></div>
       <span class="ba-label ba-label--before">Abans</span>
       <span class="ba-label ba-label--after">Després</span>
@@ -676,17 +741,17 @@ reg_body = page_hero("Regals personalitzats · Terrassa",
     </div>
     <div class="services-grid">
       <div class="service-card reveal">
-        <div class="ph">☕</div>
+        <img class="ph" src="assets/fotos/botiga-detalls.jpg" alt="Tasses personalitzades amb fotos a Terrassa" width="600" height="450" loading="lazy">
         <h3>Tasses</h3>
         <p>La teva foto o disseny en una tassa. <strong>15 €</strong> — i a partir de 5 unitats, <strong>12 €</strong> cadascuna.</p>
       </div>
       <div class="service-card reveal">
-        <div class="ph">👕</div>
+        <img class="ph" src="assets/fotos/botiga-samarretes.jpg" alt="Samarretes personalitzades amb estampació fotogràfica a Terrassa" width="600" height="450" loading="lazy">
         <h3>Samarretes i totebags</h3>
         <p>Estampació fotogràfica DTF: samarreta des de <strong>17,95 €</strong>, totebag des de <strong>16,90 €</strong>. Estampació petita, 5 €.</p>
       </div>
       <div class="service-card reveal">
-        <div class="ph">🧲</div>
+        <img class="ph" src="assets/fotos/botiga-interior.jpg" alt="Imants personalitzats amb fotos a Terrassa" width="600" height="450" loading="lazy">
         <h3>Imants</h3>
         <p>Pack de 5 imants de 5 cm amb les teves fotos per <strong>20 €</strong>. Perfectes per a la nevera de casa dels avis.</p>
       </div>
@@ -722,7 +787,7 @@ reg_body = page_hero("Regals personalitzats · Terrassa",
 
 <section class="section">
   <div class="container split">
-    <div class="ph ph--wide reveal">🎁</div>
+    <img class="ph ph--wide reveal" src="assets/fotos/botiga-totebags.jpg" alt="Totebags personalitzades amb fotos a Terrassa" width="900" height="600" loading="lazy">
     <div class="reveal">
       <h2>Regals amb història</h2>
       <p class="lead" style="margin:16px 0 26px">Un regal personalitzat amb una foto ben triada val més que mil objectes comprats amb pressa. T'ajudem a triar el material i el format perquè quedi perfecte.</p>
@@ -753,17 +818,42 @@ bot_body = page_hero("Botiga · Terrassa",
 <section class="section">
   <div class="container">
     <div class="section-head reveal"><span class="eyebrow">Analògic</span><h2>Carrets fotogràfics</h2></div>
-    <div class="price-table-wrap reveal">
-      <table class="price-table">
-        <thead><tr><th>Producte</th><th class="num">Preu</th></tr></thead>
-        <tbody>
-          <tr><td>Kodak Gold 200 — 24 exposicions</td><td class="num">13,90 €</td></tr>
-          <tr><td>Kodak Ultramax 400 — 24 exposicions</td><td class="num">14,90 €</td></tr>
-          <tr><td>Fujifilm 200 — 36 exposicions</td><td class="num">15,90 €</td></tr>
-          <tr><td>Kodak Gold 200 — 24 exp. · Bipack (2 carrets)</td><td class="num">21,90 €</td></tr>
-          <tr><td>Kodak Ultramax 400 — 36 exp. · Tripack (3 carrets)</td><td class="num">39,90 €</td></tr>
-        </tbody>
-      </table>
+    <div class="product-grid">
+      <div class="product-card reveal">
+        <div class="product-media"><img src="assets/fotos/prod-gold-24.png" alt="Carret Kodak Gold 200 de 24 exposicions — Instant Foto Terrassa" width="620" height="620" loading="lazy"></div>
+        <h3>Kodak Gold 200</h3>
+        <p class="product-desc">24 exposicions. El clàssic de tons càlids, ideal per a llum de dia.</p>
+        <p class="product-price">13,90 €</p>
+        <a class="btn btn-wa" href="{wa_link("Hola! Voldria reservar un carret Kodak Gold 200.")}" target="_blank" rel="noopener">{WA_ICON} Reservar</a>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-media"><img src="assets/fotos/prod-ultramax-24.png" alt="Carret Kodak Ultramax 400 de 24 exposicions — Instant Foto Terrassa" width="620" height="620" loading="lazy"></div>
+        <h3>Kodak Ultramax 400</h3>
+        <p class="product-desc">24 exposicions. Més sensibilitat: va bé en interiors i al capvespre.</p>
+        <p class="product-price">14,90 €</p>
+        <a class="btn btn-wa" href="{wa_link("Hola! Voldria reservar un carret Kodak Ultramax 400.")}" target="_blank" rel="noopener">{WA_ICON} Reservar</a>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-media"><img src="assets/fotos/prod-fuji-36.png" alt="Carret Fujifilm 200 de 36 exposicions — Instant Foto Terrassa" width="620" height="620" loading="lazy"></div>
+        <h3>Fujifilm 200</h3>
+        <p class="product-desc">36 exposicions. Verds i blaus característics de Fuji.</p>
+        <p class="product-price">15,90 €</p>
+        <a class="btn btn-wa" href="{wa_link("Hola! Voldria reservar un carret Fujifilm 200.")}" target="_blank" rel="noopener">{WA_ICON} Reservar</a>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-media"><img src="assets/fotos/prod-gold-bipack.png" alt="Bipack de dos carrets Kodak Gold 200 — Instant Foto Terrassa" width="620" height="620" loading="lazy"></div>
+        <h3>Bipack Kodak Gold 200</h3>
+        <p class="product-desc">2 carrets de 24 exposicions. Estalvia comprant-ne dos.</p>
+        <p class="product-price">21,90 €</p>
+        <a class="btn btn-wa" href="{wa_link("Hola! Voldria reservar el bipack Kodak Gold 200.")}" target="_blank" rel="noopener">{WA_ICON} Reservar</a>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-media"><img src="assets/fotos/prod-ultramax-tripack.png" alt="Tripack de tres carrets Kodak Ultramax 400 — Instant Foto Terrassa" width="620" height="620" loading="lazy"></div>
+        <h3>Tripack Kodak Ultramax 400</h3>
+        <p class="product-desc">3 carrets de 36 exposicions. La millor opció per a viatges llargs.</p>
+        <p class="product-price">39,90 €</p>
+        <a class="btn btn-wa" href="{wa_link("Hola! Voldria reservar el tripack Kodak Ultramax 400.")}" target="_blank" rel="noopener">{WA_ICON} Reservar</a>
+      </div>
     </div>
     <p class="price-note">Quan l'acabis, te'l <a href="revelat.html">revelem aquí mateix</a> per 13,90 €.</p>
   </div>
@@ -772,16 +862,24 @@ bot_body = page_hero("Botiga · Terrassa",
 <section class="section section--alt">
   <div class="container">
     <div class="section-head reveal"><span class="eyebrow">Per disparar</span><h2>Càmeres</h2></div>
-    <div class="price-cards" style="grid-template-columns: repeat(2, 1fr); max-width: 720px;">
-      <div class="price-card reveal">
-        <h3>Kodak d'un sol ús</h3>
-        <div class="amount">24,90 <span>€</span></div>
-        <p>27+12 exposicions. La companya perfecta per a festes, viatges i casaments.</p>
+    <div class="product-grid" style="max-width:760px">
+      <div class="product-card reveal">
+        <div class="product-media"><img src="assets/fotos/prod-kodak-unsolus.png" alt="Càmera Kodak d'un sol ús — Instant Foto Terrassa" width="620" height="620" loading="lazy"></div>
+        <div class="product-thumbs">
+          <button type="button" aria-current="true" aria-label="Vista 1"><img src="assets/fotos/prod-kodak-unsolus.png" alt="Càmera Kodak d'un sol ús"></button>
+          <button type="button" aria-label="Vista 2"><img src="assets/fotos/prod-funsaver.png" alt="Càmera Kodak FunSaver 27+12 exposicions"></button>
+        </div>
+        <h3>Càmera Kodak d'un sol ús</h3>
+        <p class="product-desc">27+12 exposicions. La companya perfecta per a festes, viatges i casaments.</p>
+        <p class="product-price">24,90 €</p>
+        <a class="btn btn-wa" href="{wa_link("Hola! Voldria reservar una càmera Kodak d'un sol ús.")}" target="_blank" rel="noopener">{WA_ICON} Reservar</a>
       </div>
-      <div class="price-card reveal">
-        <h3>Analògica reutilitzable</h3>
-        <div class="amount">39,90 <span>€</span></div>
-        <p>Càmera de carret reutilitzable: dispara, revela, recarrega i torna-hi.</p>
+      <div class="product-card reveal">
+        <div class="product-media"><img src="assets/fotos/prod-camera-reutilitzable.png" alt="Càmera analògica reutilitzable de 35 mm — Instant Foto Terrassa" width="620" height="620" loading="lazy"></div>
+        <h3>Càmera analògica reutilitzable</h3>
+        <p class="product-desc">Dispara, revela, recarrega i torna-hi. Per començar en l'analògic de debò.</p>
+        <p class="product-price">39,90 €</p>
+        <a class="btn btn-wa" href="{wa_link("Hola! Voldria reservar una càmera analògica reutilitzable.")}" target="_blank" rel="noopener">{WA_ICON} Reservar</a>
       </div>
     </div>
   </div>
@@ -794,13 +892,13 @@ bot_body = page_hero("Botiga · Terrassa",
       <table class="price-table">
         <thead><tr><th>Model</th><th class="num">Mida</th><th class="num">Preu</th></tr></thead>
         <tbody>
-          <tr><td>Bambú</td><td class="num">10×15</td><td class="num">4,90 €</td></tr>
-          <tr><td>Pedra</td><td class="num">10×15</td><td class="num">4,90 €</td></tr>
-          <tr><td>Blanc PP</td><td class="num">10×15</td><td class="num">4,90 €</td></tr>
-          <tr><td>Bambú</td><td class="num">13×18</td><td class="num">5,90 €</td></tr>
-          <tr><td>Negre PP</td><td class="num">13×18</td><td class="num">5,90 €</td></tr>
-          <tr><td>Curva</td><td class="num">13×18</td><td class="num">5,90 €</td></tr>
-          <tr><td>Ondas</td><td class="num">15×20</td><td class="num">6,90 €</td></tr>
+          <tr><td class="product-name">Bambú</td><td class="num">10×15</td><td class="num">4,90 €</td></tr>
+          <tr><td class="product-name">Pedra</td><td class="num">10×15</td><td class="num">4,90 €</td></tr>
+          <tr><td class="product-name">Blanc PP</td><td class="num">10×15</td><td class="num">4,90 €</td></tr>
+          <tr><td class="product-name">Bambú</td><td class="num">13×18</td><td class="num">5,90 €</td></tr>
+          <tr><td class="product-name">Negre PP</td><td class="num">13×18</td><td class="num">5,90 €</td></tr>
+          <tr><td class="product-name">Curva</td><td class="num">13×18</td><td class="num">5,90 €</td></tr>
+          <tr><td class="product-name">Ondas</td><td class="num">15×20</td><td class="num">6,90 €</td></tr>
         </tbody>
       </table>
     </div>
@@ -810,19 +908,56 @@ bot_body = page_hero("Botiga · Terrassa",
 <section class="section section--alt">
   <div class="container">
     <div class="section-head reveal"><span class="eyebrow">Memòria digital</span><h2>USB i targetes</h2></div>
-    <div class="price-table-wrap reveal">
-      <table class="price-table">
-        <thead><tr><th>Producte</th><th class="num">Preu</th></tr></thead>
-        <tbody>
-          <tr><td>Targeta 32 GB</td><td class="num">7,50 €</td></tr>
-          <tr><td>Targeta 64 GB</td><td class="num">9,40 €</td></tr>
-          <tr><td>USB 16 GB</td><td class="num">9,50 €</td></tr>
-          <tr><td>USB 32 GB</td><td class="num">10,50 €</td></tr>
-          <tr><td>USB 64 GB</td><td class="num">12,50 €</td></tr>
-        </tbody>
-      </table>
+    <div class="product-grid">
+      <div class="product-card reveal">
+        <div class="product-media"><img src="assets/fotos/prod-targeta-32.png" alt="Targeta de memòria microSD de 32 GB — Instant Foto Terrassa" width="620" height="620" loading="lazy"></div>
+        <h3>Targeta 32 GB</h3>
+        <p class="product-desc">Targeta microSDXC per guardar les teves cintes digitalitzades.</p>
+        <p class="product-price">7,50 €</p>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-media"><img src="assets/fotos/prod-targeta-64.png" alt="Targeta de memòria microSD de 64 GB — Instant Foto Terrassa" width="620" height="620" loading="lazy"></div>
+        <h3>Targeta 64 GB</h3>
+        <p class="product-desc">El doble de capacitat, per a arxius de vídeo llargs.</p>
+        <p class="product-price">9,40 €</p>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-media"><img src="assets/fotos/prod-usb-16.png" alt="Memòria USB Kodak de 16 GB — Instant Foto Terrassa" width="620" height="620" loading="lazy"></div>
+        <h3>USB 16 GB</h3>
+        <p class="product-desc">Kodak USB 3.2. Perfecte per a unes quantes cintes.</p>
+        <p class="product-price">9,50 €</p>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-media"><img src="assets/fotos/prod-usb-32.png" alt="Memòria USB Kodak de 32 GB — Instant Foto Terrassa" width="620" height="620" loading="lazy"></div>
+        <h3>USB 32 GB</h3>
+        <p class="product-desc">Kodak USB 3.2. La mida més equilibrada.</p>
+        <p class="product-price">10,50 €</p>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-media"><img src="assets/fotos/prod-usb-64.png" alt="Memòria USB Kodak de 64 GB — Instant Foto Terrassa" width="620" height="620" loading="lazy"></div>
+        <h3>USB 64 GB</h3>
+        <p class="product-desc">Kodak USB 3.2. Per a col·leccions senceres de vídeo familiar.</p>
+        <p class="product-price">12,50 €</p>
+      </div>
     </div>
     <p class="price-note">Ideals per emportar-te les teves <a href="digitalitzacio.html">cintes digitalitzades</a>.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <span class="eyebrow">La botiga</span>
+      <h2>Així és Instant Foto</h2>
+    </div>
+    <div class="photo-gallery reveal">
+      <img src="assets/fotos/botiga-entrada.jpg" alt="Entrada de la botiga Instant Foto a la Pl. Comte Guifré de Terrassa" width="600" height="600" loading="lazy">
+      <img src="assets/fotos/botiga-taulell.jpg" alt="Taulell d'Instant Foto, estudi fotogràfic a Terrassa" width="600" height="600" loading="lazy">
+      <img src="assets/fotos/botiga-samarretes.jpg" alt="Samarretes personalitzades a la botiga de Terrassa" width="600" height="600" loading="lazy">
+      <img src="assets/fotos/botiga-detalls.jpg" alt="Detalls i regals personalitzats a Instant Foto Terrassa" width="600" height="600" loading="lazy">
+      <img src="assets/fotos/botiga-marcs.jpg" alt="Mostrari de marcs i motllures a Terrassa" width="600" height="600" loading="lazy">
+      <img src="assets/fotos/botiga-expositor.jpg" alt="Expositor de carrets i càmeres analògiques a Terrassa" width="600" height="600" loading="lazy">
+    </div>
   </div>
 </section>
 
@@ -836,6 +971,86 @@ page("botiga.html",
      "Botiga a Terrassa: carrets, càmeres analògiques i portarretrats — Instant Foto",
      "Botiga fotogràfica a Terrassa: carrets Kodak i Fujifilm, càmeres analògiques, portarretrats i USB. Reserva per WhatsApp i recull a Pl. Comte Guifré.",
      bot_body)
+
+
+# ════════════════════════ LLOGUER DE CÀMERES ════════════════════════
+
+llo_body = page_hero("Lloguer de material · Terrassa",
+    "Lloguer de càmeres i objectius a Terrassa",
+    "Necessites una càmera professional per a un cap de setmana, un viatge o un projecte concret? Lloga el material a la botiga, sense comprar-lo. T'assessorem sobre què et convé segons el que vulguis gravar o fotografiar.",
+    "Hola! M'interessa llogar material. Us explico què necessito i per quants dies?",
+    "Consultar disponibilitat") + f'''
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Material disponible</span>
+      <h2>Càmeres i objectius</h2>
+      <p class="lead">Equip professional revisat i a punt. Consulta'ns preu i disponibilitat per WhatsApp segons els dies que el necessitis.</p>
+    </div>
+    <div class="product-grid">
+      <div class="product-card reveal">
+        <div class="product-media"><img src="assets/fotos/lloguer-cos-r10.png" alt="Lloguer de càmera Canon EOS R10 a Terrassa" width="620" height="620" loading="lazy"></div>
+        <h3>Canon EOS R10 (cos)</h3>
+        <p class="product-desc">Càmera mirrorless APS-C de 24 MP amb vídeo 4K. Lleugera i ràpida: ideal per a esdeveniments, viatges i creació de contingut.</p>
+        <p class="product-price">Consulta'ns</p>
+        <a class="btn btn-wa" href="{{wa_link("Hola! Voldria llogar el cos de la Canon EOS R10. Quin preu té i quina disponibilitat hi ha?")}}" target="_blank" rel="noopener">{{WA_ICON}} Consultar</a>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-media"><img src="assets/fotos/lloguer-kit-r10-50.png" alt="Lloguer del kit Canon EOS R10 amb objectiu RF 50 mm a Terrassa" width="620" height="620" loading="lazy"></div>
+        <h3>Kit EOS R10 + RF 50 mm</h3>
+        <p class="product-desc">El pack complet: cos i objectiu lluminós de 50 mm. La combinació més versàtil per a retrat, casaments i vídeo.</p>
+        <p class="product-price">Consulta'ns</p>
+        <a class="btn btn-wa" href="{{wa_link("Hola! Voldria llogar el kit Canon EOS R10 amb l'objectiu 50 mm. Quin preu té?")}}" target="_blank" rel="noopener">{{WA_ICON}} Consultar</a>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-media"><img src="assets/fotos/lloguer-objectiu-50.png" alt="Lloguer d'objectiu Canon RF 50 mm a Terrassa" width="620" height="620" loading="lazy"></div>
+        <h3>Objectiu Canon RF 50 mm</h3>
+        <p class="product-desc">Focal fixa lluminosa: desenfoca el fons i rendeix molt bé amb poca llum. Si ja tens cos Canon RF, només et cal això.</p>
+        <p class="product-price">Consulta'ns</p>
+        <a class="btn btn-wa" href="{{wa_link("Hola! Voldria llogar l'objectiu Canon RF 50 mm. Quin preu té?")}}" target="_blank" rel="noopener">{{WA_ICON}} Consultar</a>
+      </div>
+    </div>
+    <p class="price-note">Tens un projecte concret i no saps quin equip necessites? Escriu-nos i t'assessorem sense compromís.</p>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <span class="eyebrow">Com funciona</span>
+      <h2>Llogar és molt fàcil</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><h3>Consulta disponibilitat</h3><p>Escriu-nos per WhatsApp dient quin equip vols i per a quins dies. Et confirmem preu i disponibilitat.</p></div>
+      <div class="step reveal"><h3>Recull-lo a la botiga</h3><p>Passa per la Pl. Comte Guifré el dia acordat. Et revisem l'equip amb tu i t'expliquem el funcionament si cal.</p></div>
+      <div class="step reveal"><h3>Torna'l quan acabis</h3><p>El retornes a la botiga en la data pactada. Sense complicacions.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head section-head--center reveal"><span class="eyebrow">Dubtes freqüents</span><h2>Preguntes sobre el lloguer</h2></div>
+    <div class="faq reveal">
+      <details><summary>Quant costa llogar l'equip?</summary><p>El preu depèn dels dies i de l'equip que triïs. Escriu-nos per WhatsApp explicant què necessites i per a quan, i et donem el pressupost exacte al moment.</p></details>
+      <details><summary>Cal deixar una fiança?</summary><p>Consulta'ns les condicions concretes quan facis la reserva: t'ho expliquem tot abans, sense lletra petita.</p></details>
+      <details><summary>Puc llogar-ho per a un cap de setmana o un esdeveniment?</summary><p>Sí. Molta gent el lloga per a casaments, comunions, viatges o projectes puntuals. Reserva amb antelació per assegurar la disponibilitat.</p></details>
+      <details><summary>Sé fer servir la càmera?</summary><p>Si no n'estàs segura, no pateixis: quan la reculls t'expliquem el bàsic perquè puguis començar a disparar de seguida.</p></details>
+    </div>
+  </div>
+</section>
+
+{{cta_band("Necessites equip per a un projecte?",
+          "Digues-nos què vols gravar o fotografiar i quants dies el necessites. T'ajudem a triar l'equip i et donem preu al moment.",
+          "Hola! M'interessa llogar material. Us explico què necessito i per quants dies?",
+          "Consultar el lloguer")}}
+'''
+
+page("lloguer.html",
+     "Lloguer de càmeres i objectius a Terrassa | Instant Foto",
+     "Lloguer de càmeres i objectius a Terrassa: Canon EOS R10 i objectiu RF 50 mm. Per a esdeveniments, viatges o projectes. Consulta preu i disponibilitat per WhatsApp.",
+     llo_body)
 
 # ════════════════════════ CONTACTE ════════════════════════
 
@@ -856,6 +1071,7 @@ con_body = f'''<section class="page-hero">
         <p><strong>Instant Foto — Estudi Fotogràfic</strong><br>Pl. Comte Guifré, Local 1<br>08221 Terrassa (Barcelona)</p>
         <p style="margin-top:14px">
           📞 <a href="tel:+34618642868">618 64 28 68</a><br>
+          ✉️ <a href="mailto:instantfoto8@gmail.com">instantfoto8@gmail.com</a><br>
           📸 <a href="https://instagram.com/instant.foto" target="_blank" rel="noopener">@instant.foto</a>
         </p>
         <a class="btn btn-wa" style="margin-top:18px" href="{wa_link("Hola! Us escric des de la web d'Instant Foto.")}" target="_blank" rel="noopener">{WA_ICON} Obrir WhatsApp</a>

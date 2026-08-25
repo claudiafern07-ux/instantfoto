@@ -15,10 +15,12 @@ instantfoto/
 ├── restauracio.html      Restauració (comparador abans/després)
 ├── regals.html           Regals personalitzats (tarifes)
 ├── botiga.html           Botiga (catàleg amb preus)
+├── lloguer.html          Lloguer de càmeres i objectius
 ├── contacte.html         Contacte, mapa, horari i formulari→WhatsApp
 ├── css/styles.css        Sistema de disseny compartit
 ├── js/main.js            Menú mòbil, animacions, comparador, formularis WA
-├── assets/               Logos optimitzats + favicon
+├── assets/               Logos (blau) + favicon
+│   └── fotos/            Totes les fotos optimitzades (~9 MB)
 ├── sitemap.xml           Mapa del lloc per a Google
 ├── robots.txt
 └── build.py              (Opcional) Generador de pàgines — per editar-les totes de cop
