@@ -568,3 +568,22 @@ img.ph--wide { aspect-ratio: 16/10; }
 @media (max-width: 500px) {
   .gallery-film { grid-template-columns: repeat(2, 1fr); }
 }
+
+.feature-list li {
+  display: block;
+  position: relative;
+  padding-left: 34px;
+}
+.feature-list li::before {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  margin-top: 0;
+}
+ 
+.trust-item {
+  display: inline;
+}
+.trust-item .stars {
+  margin-right: 8px;
+}
