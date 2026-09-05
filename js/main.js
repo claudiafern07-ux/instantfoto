@@ -12,7 +12,6 @@
       var open = nav.classList.toggle('open');
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
-    // Desplegable "Serveis" en mòbil: primer toc obre, segon navega
     var dd = document.querySelector('.nav-dropdown > a');
     if (dd) {
       dd.addEventListener('click', function (e) {
@@ -60,9 +59,7 @@
     box.addEventListener('pointercancel', function () { dragging = false; });
   });
 
-  /* ---------- Formularis → WhatsApp ----------
-     Qualsevol formulari amb [data-wa-form] construeix un missatge
-     amb els camps i obre WhatsApp amb el text predefinit. */
+  /* ---------- Formularis → WhatsApp ---------- */
   document.querySelectorAll('form[data-wa-form]').forEach(function (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -79,11 +76,7 @@
     });
   });
 
-
-  /* ---------- Protecció d'imatges ----------
-     Dissuasió: bloqueja clic dret, arrossegar i el menú tàctil sobre imatges.
-     No és una protecció absoluta (cap web pot impedir una captura de pantalla),
-     però evita la descàrrega fàcil amb "Desa la imatge com a...". */
+  /* ---------- Protecció d'imatges ---------- */
   document.addEventListener('contextmenu', function (e) {
     if (e.target.closest('img, .ph, .product-media, .photo-print, .ba-compare')) {
       e.preventDefault();
@@ -108,7 +101,6 @@
         try { sessionStorage.setItem('if_bubble_closed', '1'); } catch (err) {}
       });
     }
-    // En clicar el botó de WhatsApp també es tanca
     var bubbleCta = bubble.querySelector('.btn');
     if (bubbleCta) {
       bubbleCta.addEventListener('click', function () {
