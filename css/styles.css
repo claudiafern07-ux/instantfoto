@@ -80,7 +80,6 @@ h3 { font-size: 1.25rem; }
 }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
 .brand img { height: 26px; width: auto; aspect-ratio: 900 / 98; }
-.brand .brand-iso { height: 38px; display: none; }
 
 .main-nav { display: flex; align-items: center; gap: 6px; }
 .main-nav a {
@@ -184,7 +183,7 @@ h3 { font-size: 1.25rem; }
 .photo-print:nth-child(2) { top: 2%; right: 6%; transform: rotate(3.5deg); }
 .photo-print:nth-child(3) { bottom: 4%; left: 26%; transform: rotate(-1.5deg); }
 
-/* Placeholder amb gradient + emoji (fotos reals més endavant) */
+/* Placeholder amb gradient + emoji (fallback si no hi ha foto) */
 .ph {
   display: flex; align-items: center; justify-content: center;
   font-size: 3rem; border-radius: 2px;
@@ -200,7 +199,6 @@ h3 { font-size: 1.25rem; }
   padding: 20px 24px; font-size: .92rem; color: var(--ink-soft);
 }
 .trust-inner strong { color: var(--ink); }
-.trust-item { display: flex; align-items: center; gap: 8px; }
 .stars { color: #C9A227; letter-spacing: 2px; }
 
 /* ---------- Seccions ---------- */
@@ -227,10 +225,15 @@ h3 { font-size: 1.25rem; }
 .service-card .ph { aspect-ratio: 4/3; margin-bottom: 18px; }
 .service-card h3 { margin: 0 8px 8px; }
 .service-card p { margin: 0 8px 14px; font-size: .93rem; color: var(--ink-soft); flex: 1; }
-.service-card .card-link {
-  margin: 0 8px; font-size: .88rem; font-weight: 600; color: var(--navy);
-}
+.service-card .card-link { margin: 0 8px; font-size: .88rem; font-weight: 600; color: var(--navy); }
 .service-card .card-link::after { content: ' →'; }
+.card-price {
+  margin: 0 8px 12px;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--navy);
+}
 
 /* ---------- Passos "com funciona" ---------- */
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; counter-reset: step; }
@@ -258,6 +261,7 @@ table.price-table { width: 100%; border-collapse: collapse; font-size: .93rem; m
 .price-table tbody tr:hover { background: var(--cream-soft); }
 .price-table td.num, .price-table th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .price-note { font-size: .85rem; color: var(--ink-soft); margin-top: 14px; }
+.price-table td.product-name { color: var(--navy); font-weight: 600; }
 
 .price-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .price-card {
@@ -271,11 +275,16 @@ table.price-table { width: 100%; border-collapse: collapse; font-size: .93rem; m
 
 /* ---------- Llista de característiques ---------- */
 .feature-list { list-style: none; display: grid; gap: 14px; }
-.feature-list li { display: flex; gap: 12px; align-items: flex-start; }
+.feature-list li {
+  display: block;
+  position: relative;
+  padding-left: 34px;
+}
 .feature-list li::before {
-  content: '✓'; flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+  content: '✓'; width: 22px; height: 22px; border-radius: 50%;
   background: var(--navy); color: var(--cream); font-size: .75rem;
-  display: flex; align-items: center; justify-content: center; margin-top: 3px;
+  display: flex; align-items: center; justify-content: center;
+  position: absolute; left: 0; top: 2px;
 }
 
 /* ---------- Split de dues columnes ---------- */
@@ -287,9 +296,8 @@ table.price-table { width: 100%; border-collapse: collapse; font-size: .93rem; m
   position: relative; aspect-ratio: 4/3; border-radius: 4px; overflow: hidden;
   box-shadow: var(--shadow-photo); user-select: none; touch-action: none; cursor: ew-resize;
 }
-.ba-compare .ba-after, .ba-compare .ba-before { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 3.2rem; }
-.ba-before { background: linear-gradient(135deg, #8a7d68, #5c5344); filter: sepia(.4) contrast(.85); }
-.ba-after { background: linear-gradient(135deg, var(--cream-dark), var(--navy) 150%); clip-path: inset(0 0 0 50%); }
+.ba-compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ba-compare .ba-after { clip-path: inset(0 0 0 50%); }
 .ba-handle {
   position: absolute; top: 0; bottom: 0; left: 50%; width: 3px;
   background: var(--white); box-shadow: 0 0 8px rgba(0,0,0,.4); pointer-events: none;
@@ -332,10 +340,7 @@ table.price-table { width: 100%; border-collapse: collapse; font-size: .93rem; m
 
 /* ---------- Footer ---------- */
 .site-footer { background: var(--navy-deep); color: rgba(240,235,225,.78); font-size: .92rem; }
-.footer-grid {
-  display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 40px;
-  padding: 64px 24px 48px;
-}
+.footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 40px; padding: 64px 24px 48px; }
 .site-footer h4 {
   font-family: var(--font-body); font-size: .8rem; font-weight: 700;
   letter-spacing: .14em; text-transform: uppercase; color: var(--cream); margin-bottom: 16px;
@@ -404,62 +409,7 @@ table.price-table { width: 100%; border-collapse: collapse; font-size: .93rem; m
 }
 .wa-form textarea { resize: vertical; min-height: 110px; }
 
-/* ---------- Focus visible global ---------- */
-a:focus-visible, button:focus-visible, summary:focus-visible {
-  outline: 2px solid var(--navy); outline-offset: 2px;
-}
-.section--navy a:focus-visible, .hero a:focus-visible, .cta-band a:focus-visible { outline-color: var(--cream); }
-
-/* ---------- Responsive ---------- */
-@media (max-width: 960px) {
-  .hero-inner { grid-template-columns: 1fr; padding: 60px 24px 72px; gap: 40px; }
-  .photo-stack { min-height: 320px; max-width: 480px; }
-  .photo-print .ph { width: 165px; height: 165px; }
-  .services-grid { grid-template-columns: repeat(2, 1fr); }
-  .steps, .price-cards { grid-template-columns: 1fr; gap: 24px; }
-  .split, .contact-grid { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 860px) {
-  .nav-toggle { display: block; }
-  .main-nav {
-    position: absolute; top: 72px; left: 0; right: 0;
-    background: var(--cream-soft); border-bottom: 1px solid var(--cream-dark);
-    flex-direction: column; align-items: stretch; padding: 14px 20px 22px;
-    display: none;
-  }
-  .main-nav.open { display: flex; }
-  .main-nav a { padding: 12px 10px; font-size: 1rem; }
-  .dropdown-menu {
-    position: static; opacity: 1; visibility: visible; transform: none;
-    box-shadow: none; border: none; background: transparent;
-    padding: 0 0 0 16px; display: none;
-  }
-  .nav-dropdown.open .dropdown-menu { display: flex; }
-  .nav-cta { margin: 10px 0 0; text-align: center; justify-content: center; }
-}
-@media (max-width: 600px) {
-  .services-grid { grid-template-columns: 1fr; }
-  .section { padding: 60px 0; }
-  .footer-grid { grid-template-columns: 1fr; gap: 30px; }
-  .photo-print:nth-child(3) { display: none; }
-}
-
-
-/* ============================================================
-   AMPLIACIONS — canvis sol·licitats pel client
-   ============================================================ */
-
-/* ---------- Preu destacat a les targetes de servei ---------- */
-.card-price {
-  margin: 0 8px 12px;
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--navy);
-}
-
-/* ---------- Botiga: fitxes de producte amb foto ---------- */
+/* ---------- Botiga: fitxes de producte ---------- */
 .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
 .product-card {
   background: var(--white); border-radius: 6px; box-shadow: var(--shadow-soft);
@@ -474,8 +424,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   overflow: hidden; position: relative;
 }
 .product-media img { width: 100%; height: 100%; object-fit: contain; padding: 8px; }
-.product-media .ph { width: 100%; height: 100%; font-size: 3rem; background: linear-gradient(135deg, var(--cream-dark), var(--navy) 150%); }
-/* Galeria de miniatures per producte */
 .product-thumbs { display: flex; gap: 8px; margin-bottom: 14px; }
 .product-thumbs button {
   flex: 1; aspect-ratio: 1/1; border: 1.5px solid var(--cream-dark); border-radius: 4px;
@@ -493,9 +441,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 .product-card .btn { justify-content: center; }
 
-/* Títols de producte en blau també a les taules de la botiga */
-.price-table td.product-name { color: var(--navy); font-weight: 600; }
-
 /* ---------- Protecció d'imatges ---------- */
 img, .ph, .product-media, .photo-print {
   -webkit-user-select: none; user-select: none;
@@ -503,6 +448,7 @@ img, .ph, .product-media, .photo-print {
 }
 img { pointer-events: none; }
 .product-thumbs button img, .brand img { pointer-events: auto; }
+img[src$="lloguer-kit-r10-50.png"] { background: #fff; }
 
 /* ---------- Bombolla d'avís en obrir la web ---------- */
 .intro-bubble {
@@ -527,28 +473,8 @@ img { pointer-events: none; }
   font-size: 1.1rem; line-height: 1; color: var(--ink-soft);
 }
 .bubble-close:hover { background: var(--cream-dark); color: var(--ink); }
-@media (max-width: 600px) {
-  .intro-bubble { right: 12px; left: 12px; width: auto; bottom: 88px; }
-  .product-grid { grid-template-columns: 1fr; }
-}
-@media (max-width: 960px) {
-  .product-grid { grid-template-columns: repeat(2, 1fr); }
-}
 
-
-/* ============================================================
-   FOTOS REALS — ajustos
-   ============================================================ */
-img.ph { object-fit: cover; width: 100%; height: auto; }
-.service-card img.ph { aspect-ratio: 4/3; }
-.photo-print img.ph { width: 210px; height: 210px; object-fit: cover; }
-img.ph--tall { aspect-ratio: 3/4; }
-img.ph--wide { aspect-ratio: 16/10; }
-.ba-compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.ba-compare .ba-before { filter: sepia(.55) contrast(.8) brightness(.92) saturate(.7); }
-.ba-compare .ba-after { clip-path: inset(0 0 0 50%); filter: none; }
-
-/* Galeria de fotos (emmarcacions, carret) */
+/* ---------- Galeries de fotos ---------- */
 .photo-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .photo-gallery img {
   width: 100%; aspect-ratio: 1/1; object-fit: cover;
@@ -561,42 +487,68 @@ img.ph--wide { aspect-ratio: 16/10; }
   width: 100%; aspect-ratio: 2/3; object-fit: cover;
   border-radius: 3px; box-shadow: var(--shadow-soft);
 }
+
+/* ---------- Fotos reals: ajustos generals ---------- */
+img.ph { object-fit: cover; width: 100%; height: auto; }
+.service-card img.ph { aspect-ratio: 4/3; }
+.photo-print img.ph { width: 210px; height: 210px; object-fit: cover; }
+img.ph--tall { aspect-ratio: 3/4; }
+img.ph--wide { aspect-ratio: 16/10; }
+
+/* ---------- Focus visible global ---------- */
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--navy); outline-offset: 2px;
+}
+.section--navy a:focus-visible, .hero a:focus-visible, .cta-band a:focus-visible { outline-color: var(--cream); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+  .hero-inner { grid-template-columns: 1fr; padding: 60px 24px 72px; gap: 40px; }
+  .photo-stack { min-height: 320px; max-width: 480px; }
+  .photo-print .ph { width: 165px; height: 165px; }
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .steps, .price-cards { grid-template-columns: 1fr; gap: 24px; }
+  .split, .contact-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 860px) {
+  .nav-toggle { display: block; }
+  .main-nav {
+    position: absolute; top: 72px; left: 0; right: 0;
+    background: var(--cream-soft); border-bottom: 1px solid var(--cream-dark);
+    flex-direction: column; align-items: stretch; padding: 14px 20px 22px;
+    display: none;
+  }
+  .main-nav.open { display: flex; }
+  .main-nav a { padding: 12px 10px; font-size: 1rem; }
+  .dropdown-menu {
+    position: static; opacity: 1; visibility: visible; transform: none;
+    box-shadow: none; border: none; background: transparent;
+    padding: 0 0 0 16px; display: none;
+  }
+  .nav-dropdown.open .dropdown-menu { display: flex; }
+  .nav-cta { margin: 10px 0 0; text-align: center; justify-content: center; }
+}
+@media (max-width: 600px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .section { padding: 60px 0; }
+  .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+  .photo-print:nth-child(3) { display: none; }
+  .product-grid { grid-template-columns: 1fr; }
   .photo-gallery { grid-template-columns: repeat(2, 1fr); }
   .gallery-film { grid-template-columns: repeat(3, 1fr); }
+  .intro-bubble { right: 12px; left: 12px; width: auto; bottom: 88px; }
 }
 @media (max-width: 500px) {
   .gallery-film { grid-template-columns: repeat(2, 1fr); }
 }
 
-.feature-list li {
-  display: block;
-  position: relative;
-  padding-left: 34px;
-}
-.feature-list li::before {
-  position: absolute;
-  left: 0;
-  top: 2px;
-  margin-top: 0;
-}
- 
-.trust-item {
-  display: inline;
-}
-.trust-item .stars {
-  margin-right: 8px;
-}
-
-/* Foto de lloguer en la home: fondo blanco en vez del degradado
-   (la foto tiene el fondo recortado/transparente) */
-img[src$="lloguer-kit-r10-50.png"] { background: #fff; }
- 
 /* Los precios (13,90 €) ya no bajan de línea en móvil */
 @media (max-width: 600px) {
   .price-card .amount { font-size: 1.9rem; white-space: nowrap; }
 }
- 
+
 /* Las tarjetas de producto ya no quedan tapadas por el botón
    flotante de WhatsApp al final de la página, en móvil */
 @media (max-width: 600px) {
@@ -604,16 +556,14 @@ img[src$="lloguer-kit-r10-50.png"] { background: #fff; }
   .wa-float svg { width: 24px; height: 24px; }
   main { padding-bottom: 70px; }
 }
- 
+
 /* Más aire entre el título y el texto de debajo, en móvil */
 @media (max-width: 600px) {
   .page-hero .lead { margin-top: 20px; font-size: 1rem; }
   .section-head .lead { margin-top: 12px; }
 }
- 
-/* Las fotos en móvil se ven enteras en vez de recortadas
-   (puede dejar un pequeño margen a los lados si la foto no
-   es exactamente cuadrada — es el efecto esperado) */
+
+/* Las fotos en móvil se ven enteras en vez de recortadas */
 @media (max-width: 600px) {
   img.ph { object-fit: contain; background: var(--cream-soft); }
 }
