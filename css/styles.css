@@ -587,3 +587,33 @@ img.ph--wide { aspect-ratio: 16/10; }
 .trust-item .stars {
   margin-right: 8px;
 }
+
+/* Foto de lloguer en la home: fondo blanco en vez del degradado
+   (la foto tiene el fondo recortado/transparente) */
+img[src$="lloguer-kit-r10-50.png"] { background: #fff; }
+ 
+/* Los precios (13,90 €) ya no bajan de línea en móvil */
+@media (max-width: 600px) {
+  .price-card .amount { font-size: 1.9rem; white-space: nowrap; }
+}
+ 
+/* Las tarjetas de producto ya no quedan tapadas por el botón
+   flotante de WhatsApp al final de la página, en móvil */
+@media (max-width: 600px) {
+  .wa-float { width: 48px; height: 48px; }
+  .wa-float svg { width: 24px; height: 24px; }
+  main { padding-bottom: 70px; }
+}
+ 
+/* Más aire entre el título y el texto de debajo, en móvil */
+@media (max-width: 600px) {
+  .page-hero .lead { margin-top: 20px; font-size: 1rem; }
+  .section-head .lead { margin-top: 12px; }
+}
+ 
+/* Las fotos en móvil se ven enteras en vez de recortadas
+   (puede dejar un pequeño margen a los lados si la foto no
+   es exactamente cuadrada — es el efecto esperado) */
+@media (max-width: 600px) {
+  img.ph { object-fit: contain; background: var(--cream-soft); }
+}
