@@ -388,7 +388,9 @@ table.price-table { width: 100%; border-collapse: collapse; font-size: .93rem; m
 /* ---------- Pàgina interior: capçalera ---------- */
 .page-hero {
   background: linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
-  color: var(--cream); padding: 64px 0 72px;
+  color: var(--cream); 
+  padding: 64px 0 72px;
+  margin-bottom: 0 !important; /* Asegura que no deje espacio abajo */
 }
 .page-hero h1 { color: var(--white); max-width: 18ch; }
 .page-hero .lead { color: rgba(240,235,225,.85); margin-top: 16px; }
