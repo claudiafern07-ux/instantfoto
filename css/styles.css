@@ -356,6 +356,15 @@ table.price-table { width: 100%; border-collapse: collapse; font-size: .93rem; m
   justify-content: space-between; font-size: .82rem;
 }
 
+/* ---------- Media query para móviles ---------- */
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr; /* Pasa a 1 columna vertical */
+    gap: 24px;                  /* Reduce el espacio excesivo */
+    padding: 40px 20px 32px;
+  }
+}
+
 /* ---------- WhatsApp flotant ---------- */
 .wa-float {
   position: fixed; right: 20px; bottom: 20px; z-index: 90;
