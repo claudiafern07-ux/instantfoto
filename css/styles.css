@@ -334,42 +334,26 @@ table.price-table { width: 100%; border-collapse: collapse; font-size: .93rem; m
 
 /* ---------- CTA final ---------- */
 .cta-band { 
-  background: var(--navy-deep) !important; /* Mismo color azul oscuro que el footer */
+  background: var(--navy-deep) !important;
   color: var(--cream); 
   margin-bottom: 0 !important;
-  padding-bottom: 70px;
+  padding: 48px 0 24px !important; /* Espaciado compacto arriba y abajo */
 }
-.cta-band .container { padding-top: 70px; padding-bottom: 0; text-align: center; }
+.cta-band .container { padding: 0 24px !important; text-align: center; }
 .cta-band h2 { color: var(--white); margin-bottom: 12px; }
-.cta-band p { color: rgba(240,235,225,.85); max-width: 55ch; margin: 0 auto 30px; }
-
-/* Elimina cualquier posible separación entre la sección CTA y el Footer */
-.cta-band + .site-footer,
-.cta-band + header,
-.cta-band + footer {
-  margin-top: 0 !important;
-}
+.cta-band p { color: rgba(240,235,225,.85); max-width: 55ch; margin: 0 auto 24px; }
 
 /* ---------- Footer ---------- */
 .site-footer { 
   background: var(--navy-deep); 
   color: rgba(240,235,225,.78); 
   font-size: .92rem;
-  margin-top: -1px !important; /* Solapa 1px para evitar líneas de renderizado en móvil */
+  margin-top: 0 !important;
   position: relative;
   z-index: 2;
 }
 
-/* Fuerza a que la última sección antes del footer no tenga espacio abajo */
-main > section:last-of-type,
-main > div:last-of-type,
-section.section--navy,
-.cta-band {
-  margin-bottom: 0 !important;
-  padding-bottom: 40px; /* Asegura aire interior en la parte azul */
-}
-
-.footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 40px; padding: 64px 24px 48px; }
+.footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 40px; padding: 32px 24px 48px; }
 .site-footer h4 {
   font-family: var(--font-body); font-size: .8rem; font-weight: 700;
   letter-spacing: .14em; text-transform: uppercase; color: var(--cream); margin-bottom: 16px;
