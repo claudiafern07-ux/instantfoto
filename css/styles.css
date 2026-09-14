@@ -333,10 +333,22 @@ table.price-table { width: 100%; border-collapse: collapse; font-size: .93rem; m
 .faq details p { padding-bottom: 18px; color: var(--ink-soft); font-size: .95rem; }
 
 /* ---------- CTA final ---------- */
-.cta-band { background: var(--navy); color: var(--cream); }
-.cta-band .container { padding-top: 70px; padding-bottom: 70px; text-align: center; }
+.cta-band { 
+  background: var(--navy-deep) !important; /* Mismo color azul oscuro que el footer */
+  color: var(--cream); 
+  margin-bottom: 0 !important;
+  padding-bottom: 70px;
+}
+.cta-band .container { padding-top: 70px; padding-bottom: 0; text-align: center; }
 .cta-band h2 { color: var(--white); margin-bottom: 12px; }
 .cta-band p { color: rgba(240,235,225,.85); max-width: 55ch; margin: 0 auto 30px; }
+
+/* Elimina cualquier posible separación entre la sección CTA y el Footer */
+.cta-band + .site-footer,
+.cta-band + header,
+.cta-band + footer {
+  margin-top: 0 !important;
+}
 
 /* ---------- Footer ---------- */
 .site-footer { 
