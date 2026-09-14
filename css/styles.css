@@ -562,8 +562,3 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   .page-hero .lead { margin-top: 20px; font-size: 1rem; }
   .section-head .lead { margin-top: 12px; }
 }
-
-/* Las fotos en móvil se ven enteras en vez de recortadas */
-@media (max-width: 600px) {
-  img.ph { object-fit: contain; background: var(--cream-soft); }
-}
