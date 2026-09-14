@@ -246,7 +246,7 @@ index_body = f'''
         <span class="card-link">Imprimir fotos a Terrassa</span>
       </a>
       <a class="service-card reveal" href="emmarcacions.html">
-        <img class="ph" src="assets/fotos/serv-emmarcacions.jpg" alt="Emmarcacions a mida fetes a Terrassa" width="600" height="450" loading="lazy">
+        <img class="ph" src="assets/fotos/Enmarcacionsportada.jpg" alt="Emmarcacions a mida fetes a Terrassa" width="600" height="450" loading="lazy">
         <h3>Emmarcacions a mida</h3>
         <p>Marcs a mida per a fotos, làmines i llenços. També miralls personalitzats.</p>
         <p class="card-price">Pressupost gratuït</p>
