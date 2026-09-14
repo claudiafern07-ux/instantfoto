@@ -50,7 +50,7 @@ FOOTER = f'''<footer class="site-footer">
     <div class="footer-brand">
       <img src="assets/logo-horizontal-cream.png" alt="Instant Foto" width="190" height="21" loading="lazy">
       <p>Especialistes en conservar els teus records a Terrassa. Estudi fotogràfic de proximitat, amb tracte personal.</p>
-      <p style="margin-top:12px">⭐ 5,0 a Google · 26 ressenyes<br>🏳️‍🌈 LGBTQ+ friendly · Propietàries dones</p>
+      <p style="margin-top:12px">⭐ 5,0 a Google · 34 ressenyes<br>🏳️‍🌈 LGBTQ+ friendly · Propietàries dones</p>
     </div>
     <div>
       <h4>Serveis</h4>
@@ -224,7 +224,7 @@ index_body = f'''
 
 <div class="trust-strip">
   <div class="container trust-inner">
-    <span class="trust-item"><span class="stars">★★★★★</span> <strong>5,0 a Google</strong> · 26 ressenyes</span>
+    <span class="trust-item"><span class="stars">★★★★★</span> <strong>5,0 a Google</strong> · 34 ressenyes</span>
     <span class="trust-item">🏳️‍🌈 LGBTQ+ friendly</span>
     <span class="trust-item">👩‍💼 Propietàries dones</span>
     <span class="trust-item">📍 Pl. Comte Guifré, Terrassa</span>
@@ -253,7 +253,7 @@ index_body = f'''
         <span class="card-link">Emmarcacions a Terrassa</span>
       </a>
       <a class="service-card reveal" href="digitalitzacio.html">
-        <img class="ph" src="assets/fotos/serv-digitalitzacio.jpg" alt="Digitalitzar cintes VHS i diapositives a Terrassa" width="600" height="450" loading="lazy">
+        <img class="ph" src="assets/fotos/vhs.jpg" alt="Digitalitzar cintes VHS i diapositives a Terrassa" width="600" height="450" loading="lazy">
         <h3>Digitalització de cintes</h3>
         <p>VHS, MiniDV, Hi8, Super 8, Beta, diapositives… Les teves cintes mai surten de la botiga.</p>
         <p class="card-price">Des de 13 €</p>
