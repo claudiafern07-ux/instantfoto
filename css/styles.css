@@ -339,7 +339,24 @@ table.price-table { width: 100%; border-collapse: collapse; font-size: .93rem; m
 .cta-band p { color: rgba(240,235,225,.85); max-width: 55ch; margin: 0 auto 30px; }
 
 /* ---------- Footer ---------- */
-.site-footer { background: var(--navy-deep); color: rgba(240,235,225,.78); font-size: .92rem; margin-top: 0 !important; }
+.site-footer { 
+  background: var(--navy-deep); 
+  color: rgba(240,235,225,.78); 
+  font-size: .92rem;
+  margin-top: -1px !important; /* Solapa 1px para evitar líneas de renderizado en móvil */
+  position: relative;
+  z-index: 2;
+}
+
+/* Fuerza a que la última sección antes del footer no tenga espacio abajo */
+main > section:last-of-type,
+main > div:last-of-type,
+section.section--navy,
+.cta-band {
+  margin-bottom: 0 !important;
+  padding-bottom: 40px; /* Asegura aire interior en la parte azul */
+}
+
 .footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 40px; padding: 64px 24px 48px; }
 .site-footer h4 {
   font-family: var(--font-body); font-size: .8rem; font-weight: 700;
