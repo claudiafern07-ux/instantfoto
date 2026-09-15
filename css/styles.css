@@ -334,7 +334,7 @@ table.price-table { width: 100%; border-collapse: collapse; font-size: .93rem; m
 
 /* ---------- CTA final ---------- */
 .cta-band { 
-  background: var(--navy-deep) !important;
+  background: var(--navy) !important;
   color: var(--cream); 
   margin-bottom: 0 !important;
   padding: 48px 0 24px !important; /* Espaciado compacto arriba y abajo */
