@@ -472,7 +472,7 @@ img, .ph, .product-media, .photo-print {
 }
 img { pointer-events: none; }
 .product-thumbs button img, .brand img { pointer-events: auto; }
-img[src$="lloguer-kit-r10-50.png"] { background: #fff; }
+img[src$="lloguer-kit-r10-50.png"] { background: var(--cream-soft);}
 
 /* ---------- Bombolla d'avís en obrir la web ---------- */
 .intro-bubble {
